@@ -9,7 +9,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.title = @"SCInsta";
+        self.title = @"RaulGram";
         [self.navigationController.navigationBar setPrefersLargeTitles:false];
     }
     return self;
@@ -85,63 +85,22 @@
 - (NSArray *)specifiers {
     if (!_specifiers) {        
         _specifiers = [NSMutableArray arrayWithArray:@[
-            // Section 1: General
-            [self newSectionWithTitle:@"General" footer:nil],
-            [self newSwitchCellWithTitle:@"Hide Meta AI" detailTitle:@"Hides the meta ai buttons within the app" key:@"hide_meta_ai" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"Copy description" detailTitle:@"Copy the post description with a long press" key:@"copy_description" defaultValue:true changeAction:nil],
-            [self newSwitchCellWithTitle:@"Hide reels tab" detailTitle:@"Hides the reels tab on the bottom navbar" key:@"hide_reels_tab" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"Do not save recent searches" detailTitle:@"Search bars will no longer save your recent searches" key:@"no_recent_searches" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"Hide explore posts grid" detailTitle:@"Hides the grid of suggested posts on the explore/search tab" key:@"hide_explore_grid" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"Hide trending searches" detailTitle:@"Hides the trending searches under the explore search bar" key:@"hide_trending_searches" defaultValue:true changeAction:nil],
-            [self newSwitchCellWithTitle:@"No suggested chats" detailTitle:@"Hides the suggested broadcast channels in direct messages" key:@"no_suggested_chats" defaultValue:true changeAction:nil],
-            [self newSwitchCellWithTitle:@"No suggested users" detailTitle:@"Hides the suggested users for you to follow" key:@"no_suggested_users" defaultValue:false changeAction:nil],
+            // Section 1: Developer Options
+            [self newSectionWithTitle:@"Hidden Developer Options" footer:nil],
+            [self newSwitchCellWithTitle:@"Enable Internal Settings" detailTitle:@"Enables internal/employee only settings" key:@"dev_options" defaultValue:false changeAction:nil],
+            [self newSwitchCellWithTitle:@"Enable music stickers" detailTitle:@"Adds new stickers to music in story" key:@"music_stickers" defaultValue:false changeAction:nil],
+            [self newSwitchCellWithTitle:@"Share comment" detailTitle:@"Shows sharesheet to share a comment" key:@"share_comment" defaultValue:false changeAction:nil],
+            [self newSwitchCellWithTitle:@"Share location" detailTitle:@"Share location in chat" key:@"share_loc" defaultValue:false changeAction:nil],
 
-            // Section 2: Feed
-            [self newSectionWithTitle:@"Feed" footer:nil],
-            [self newSwitchCellWithTitle:@"Hide ads" detailTitle:@"Removes all ads from the Instagram app" key:@"hide_ads" defaultValue:true changeAction:nil],
-            [self newSwitchCellWithTitle:@"Hide stories tray" detailTitle:@"Hides the story tray at the top and within your feed" key:@"hide_stories_tray" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"No suggested posts" detailTitle:@"Removes suggested posts from your feed" key:@"no_suggested_post" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"No suggested for you" detailTitle:@"Hides suggested accounts for you to follow" key:@"no_suggested_account" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"No suggested reels" detailTitle:@"Hides suggested reels to watch" key:@"no_suggested_reels" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"No suggested threads posts" detailTitle:@"Hides suggested threads posts" key:@"no_suggested_threads" defaultValue:true changeAction:nil],
-            
-            // Section 3: Confirm actions
-            [self newSectionWithTitle:@"Confirm actions" footer:nil],
-            [self newSwitchCellWithTitle:@"Confirm like: Posts" detailTitle:@"Shows an alert when you click the like button on posts to confirm the like" key:@"like_confirm" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"Confirm like: Reels" detailTitle:@"Shows an alert when you click the like button on reels to confirm the like" key:@"like_confirm_reels" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"Confirm follow" detailTitle:@"Shows an alert when you click the follow button to confirm the follow" key:@"follow_confirm" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"Confirm call" detailTitle:@"Shows an alert when you click the audio/video call button to confirm before calling" key:@"call_confirm" defaultValue:true changeAction:nil],
-            [self newSwitchCellWithTitle:@"Confirm voice messages" detailTitle:@"Shows an alert to confirm before sending a voice message" key:@"voice_message_confirm" defaultValue:true changeAction:nil],
-            [self newSwitchCellWithTitle:@"Confirm sticker interaction" detailTitle:@"Shows an alert when you click a sticker on someone's story to confirm the action" key:@"sticker_interact_confirm" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"Confirm posting comment" detailTitle:@"Shows an alert when you click the post comment button to confirm" key:@"post_comment_confirm" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"Confirm changing theme" detailTitle:@"Shows an alert when you change a dm channel theme to confirm" key:@"change_direct_theme_confirm" defaultValue:false changeAction:nil],
-
-            // Section 4: Save media
-            [self newSectionWithTitle:@"Save media" footer:nil],
-            [self newSwitchCellWithTitle:@"Download images/videos" detailTitle:@"Download images/videos on long press" key:@"dw_videos" defaultValue:true changeAction:nil],
-            [self newSwitchCellWithTitle:@"Save profile image" detailTitle:@"Save profile image on long press" key:@"save_profile" defaultValue:true changeAction:nil],
-
-            // Section 5: Stories and Messages
-            [self newSectionWithTitle:@"Story and messages" footer:nil],
-            [self newSwitchCellWithTitle:@"Keep deleted message" detailTitle:@"Keeps deleted direct messages in the chat" key:@"keep_deleted_message" defaultValue:true changeAction:nil],
-            [self newSwitchCellWithTitle:@"Unlimited replay of direct stories" detailTitle:@"Replays direct messages normal/once stories unlimited times" key:@"unlimited_replay" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"Disable sending read receipts" detailTitle:@"Removes the seen text for others when you view a message" key:@"remove_lastseen" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"Remove screenshot alert" detailTitle:@"Removes the alert notifying others that you screenshotted a direct story" key:@"remove_screenshot_alert" defaultValue:true changeAction:nil],
-            [self newSwitchCellWithTitle:@"Disable story seen receipt" detailTitle:@"Hides the notification for others when you view their story" key:@"no_seen_receipt" defaultValue:false changeAction:nil],
-
-            // Section 6: Security
-            [self newSectionWithTitle:@"Security" footer:nil],
-            [self newSwitchCellWithTitle:@"Padlock" detailTitle:@"Locks Instagram with biometrics/password" key:@"padlock" defaultValue:false changeAction:nil],
-
-            // Section 7: Debugging
+            // Section 2: Debugging
             [self newSectionWithTitle:@"Debugging" footer:nil],
             [self newSwitchCellWithTitle:@"Enable FLEX gesture" detailTitle:@"Allows you to hold 5 fingers on the screen to open the FLEX explorer" key:@"flex_instagram" defaultValue:false changeAction:@selector(FLEXAction:)],
 
-            // Section 8: Credits
+            // Section 3: Credits
             [self newSectionWithTitle:@"Credits" footer:[NSString stringWithFormat:@"SCInsta %@\n\nInstagram v%@", SCIVersionString, [SCIUtils IGVersionString]]],
-            [self newLinkCellWithTitle:@"Developer" detailTitle:@"SoCuul" url:@"https://socuul.dev" iconURL:@"https://i.imgur.com/WSFMSok.png"],
-            [self newLinkCellWithTitle:@"Donate" detailTitle:@"Consider donating if you enjoy this tweak!" url:@"https://ko-fi.com/socuul" iconURL:nil],
-            [self newLinkCellWithTitle:@"View Repo" detailTitle:@"View the tweak's source code on GitHub" url:@"https://github.com/SoCuul/SCInsta" iconURL:nil]
+            [self newLinkCellWithTitle:@"Developer" detailTitle:@"Raul Fernandes" url:@"https://github.com/RaulTheMiner17" iconURL:@"https://i.imgur.com/WSFMSok.png"],
+            [self newLinkCellWithTitle:@"Donate" detailTitle:@"Consider donating if you enjoy this tweak!" url:@"https://ko-fi.com/" iconURL:nil],
+            [self newLinkCellWithTitle:@"View Repo" detailTitle:@"View the tweak's source code on GitHub" url:@"https://github.com/RaulTheMiner17/SCInsta" iconURL:nil]
         ]];
         
         [self collectDynamicSpecifiersFromArray:_specifiers];

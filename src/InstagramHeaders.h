@@ -1,9 +1,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <substrate.h>
 #import "Manager.h"
-#import "Download.h"
 #import "Controllers/SettingsViewController.h"
-#import "Controllers/SecurityViewController.h"
 #import "../modules/JGProgressHUD/JGProgressHUD.h"
 
 @interface IGRootViewController : UIViewController
@@ -35,230 +34,6 @@
 @interface IGTabBar: UIView
 @end
 
-@interface IGTableViewCell: UITableViewCell
-- (id)initWithReuseIdentifier:(NSString *)identifier;
-@end
-
-@interface IGProfileSheetTableViewCell : IGTableViewCell
-@end
-
-@interface IGTallNavigationBarView : UIView
-@end
-
-@interface UIView (RCTViewUnmounting)
-@property(retain, nonatomic) UIViewController *viewController;
-- (UIView *)_rootView;
-@end
-
-@interface IGImageSpecifier : NSObject
-@property(readonly, nonatomic) NSURL *url;
-@end
-
-@interface IGVideo : NSObject
-@property(readonly, nonatomic) NSSet *allVideoURLs;
-@end
-
-@interface IGMedia : NSObject
-@property(readonly) IGVideo *video;
-@property long long likeCount;
-@end
-
-@interface IGPhoto: NSObject
-@end
-
-@interface IGPostItem : NSObject
-@property(readonly) IGVideo *video;
-@property(readonly) IGPhoto *photo;
-@end
-
-@interface IGPageMediaView : UIView
-@property(readonly) NSMutableArray <IGPostItem *> *items;
-- (IGPostItem *)currentMediaItem;
-@end
-
-@interface IGFeedItem : NSObject
-@property long long likeCount;
-@property(readonly) IGVideo *video;
-- (BOOL)isSponsored;
-- (BOOL)isSponsoredApp;
-@end
-
-@interface IGImageView : UIImageView
-@property(retain, nonatomic) IGImageSpecifier *imageSpecifier;
-@end
-
-@interface IGFeedItemPagePhotoCell : UICollectionViewCell
-@property (nonatomic, strong) id post;
-@end
-
-@interface IGProfilePicturePreviewViewController : UIViewController
-{
-    IGImageView *_profilePictureView;
-}
-@property (nonatomic, strong) JGProgressHUD *hud;
-- (void)addHandleLongPress; // new
-- (void)handleLongPress:(UILongPressGestureRecognizer *)sender; // new
-@end
-
-@interface IGProfilePicturePreviewViewController () <SCIDownloadDelegate>
-@end
-
-@interface IGFeedItemMediaCell : UICollectionViewCell
-@property(retain, nonatomic) IGMedia *post;
-- (UIImage *)mediaCellCurrentlyDisplayedImage;
-@end
-
-@interface IGFeedItemPhotoCell : IGFeedItemMediaCell
-@end
-
-@interface IGFeedPhotoView : UIView
-@property (nonatomic, strong) id delegate;
-@property (nonatomic, strong) JGProgressHUD *hud;
-@end
-@interface IGFeedPhotoView () <SCIDownloadDelegate>
-@end
-
-@interface IGSundialViewerVideoCell : UIView
-- (void)addHandleLongPress; // new
-- (void)handleLongPress:(UILongPressGestureRecognizer *)sender; // new
-@property (nonatomic, strong) JGProgressHUD *hud;
-@property(readonly, nonatomic) IGMedia *video;
-@end
-
-@interface IGSundialViewerVideoCell () <SCIDownloadDelegate>
-@end
-
-@interface IGModernFeedVideoCell : IGFeedItemMediaCell
-- (void)addHandleLongPress; // new
-- (void)handleLongPress:(UILongPressGestureRecognizer *)sender; // new
-@property (nonatomic, strong) JGProgressHUD *hud;
-@property (nonatomic, strong) id delegate;
-@end
-
-@interface IGModernFeedVideoCell () <SCIDownloadDelegate>
-@end
-
-@interface IGVideoPlayer : NSObject {
-  IGVideo *_video;
-}
-@end
-
-
-/**
- * For download story photo/video
- */
-@protocol IGStoryPlayerMediaViewType
-@end
-
-@interface IGImageProgressView : UIView
-@property(retain, nonatomic) IGImageSpecifier *imageSpecifier;
-@end
-
-@interface IGStoryPhotoView : UIView<IGStoryPlayerMediaViewType>
-@property(retain, nonatomic) IGImageSpecifier *mediaViewLastLoadedImageSpecifier;
-@property(readonly, nonatomic) IGImageProgressView *photoView;
-@end
-
-@interface IGStoryVideoView : UIView<IGStoryPlayerMediaViewType>
-@property(retain, nonatomic) IGVideoPlayer *videoPlayer;
-@end
-
-@interface IGStoryFullscreenDefaultFooterView : UIView
-@end
-
-@interface IGStoryFullscreenFooterContainerView : UIView
-@property(nonatomic) IGStoryFullscreenDefaultFooterView *defaultFooterView;
-@end
-
-@interface IGStoryFullscreenOverlayView : UIView
-@property(retain, nonatomic) IGStoryFullscreenFooterContainerView *footerContainerView;
-@end
-
-@interface IGStoryFullscreenCell : UICollectionViewCell
-@end
-
-@interface IGStoryViewerViewController : UIViewController
-{
-    id _focusStoryItemOnEntry;
-}
-- (id)_getMostVisibleSectionController;
-- (void)fullscreenSectionController:(id)arg1 didMarkItemAsSeen:(id)arg2;
-@property (nonatomic) UIView *contentViewForSnapshot;
-@end
-
-@interface IGStoryFullscreenSectionController : NSObject
-@property (nonatomic) id delegate;
-@end
-
-@interface IGStoryViewerContainerView : UIView
-@property (retain, nonatomic) UIView<IGStoryPlayerMediaViewType> *mediaView;
-@property (nonatomic) IGStoryFullscreenOverlayView *overlayView;
-@property (nonatomic, weak) id delegate;
-@property (nonatomic, retain) UIButton *hDownloadButton; // new property
-@property (nonatomic, strong) JGProgressHUD *hud;
-@property (nonatomic, retain) NSString *fileextension;
-- (void)hDownloadButtonPressed:(UIButton *)sender;
-@end
-
-@interface IGStoryViewerContainerView () <SCIDownloadDelegate>
-@end
-
-
-/**
- * For HD profile picture
- */
-@interface IGUser : NSObject
-@property NSInteger followStatus;
-@property(copy) NSString *username;
-@property BOOL followsCurrentUser;
-- (NSURL *)HDProfilePicURL;
-- (BOOL)isUser;
-@end
-
-@interface IGFollowController : NSObject 
-@property IGUser *user;
-@end
-
-@interface IGCoreTextView : UIView
-@property(nonatomic, strong) NSString *text;
-- (void)addHandleLongPress; // new
-- (void)handleLongPress:(UILongPressGestureRecognizer *)sender; // new
-@end
-
-/**
- * Determine If User Is Following You
- */
-@interface IGProfileBioModel
-@property (readonly, copy, nonatomic) IGUser *user;
-@end
-
-@interface IGProfileViewController : UIViewController {
-    IGProfileBioModel *_bioModel;
-}
-@end
-
-@interface IGProfileSimpleAvatarStatsCell : UICollectionViewCell
-@property (nonatomic, retain) UIView *isFollowingYouBadge; // new property
-@property (nonatomic, retain) UILabel *isFollowingYouLabel; // new property
-- (void)addIsFollowingYouBadgeView; // new
-@end
-
-@interface IGUserSession : NSObject
-@property (readonly, nonatomic) IGUser *user;
-@end
-
-@interface IGWindow : UIWindow
-@property (nonatomic) __weak IGUserSession *userSession;
-@end
-
-@interface IGShakeWindow : UIWindow
-@property (nonatomic) __weak IGUserSession *userSession;
-@end
-
-@interface IGStyledString : NSObject
-@property (retain, nonatomic) NSMutableAttributedString *attributedString;
-- (void)appendString:(id)arg1;
-@end
 
 @interface IGInstagramAppDelegate : NSObject <UIApplicationDelegate>
 @end
@@ -326,10 +101,57 @@
 - (id)commandString;
 @end
 
+/**
+ * For Music Stickers
+ */
+@interface IGMusicStickerEditorStylePicker : UIView
+@property (nonatomic, strong) NSArray *styleList; // Original property
+@end
 
+/**
+ * For Comment Sharing
+ */
+@interface IGCommentThreadViewController : UIViewController
+- (void)commentController:(id)controller didTapLikeForComment:(id)comment;
+- (void)commentController:(id)controller didTapShareSheetWithComment:(id)comment;
+@end
 
+/**
+ * For Share Location
+ */
+ 
+@interface IGDirectComposerButton : UIButton
+- (void)handleLongPressOnStickersButton; // new
+- (void)handleLongPress:(UILongPressGestureRecognizer *)sender; // new
+@end
 
+@interface IGDirectComposer : UIView
+- (void)_didTapLocationSharingButton:(id)arg1;
+- (void)shareLocation;
+- (id)stickerButton;
+- (void)handleLongPressOnStickersButton; // new
+- (void)handleLongPress:(UILongPressGestureRecognizer *)sender; // new
+@end
+/**
+ * For Developer options
+ */
+@interface IGRegistrationWelcomeViewController : UIViewController
+- (UIViewController *)_developerOptionsView;
+@end
 
+@interface IGSeenStateStore : NSObject
+- (instancetype)initWithDependencies:(id)dependencies isEmployee:(bool)employee;
+@end
+
+@interface IGBugReportMenuViewController : NSObject
+- (BOOL)canRespondToGesture:(id)gesture;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+@property (nonatomic, strong) UITableView *tableView;
+@end
+
+@interface BCNComposerController : NSObject
+@property (nonatomic, assign) BOOL employeeInternalOnlyEnabled;
+@end
 /////////////////////////////////////////////////////////////////////////////
 
 
