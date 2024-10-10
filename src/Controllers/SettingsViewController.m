@@ -99,8 +99,7 @@
             // Section 3: Credits
             [self newSectionWithTitle:@"Credits" footer:[NSString stringWithFormat:@"SCInsta %@\n\nInstagram v%@", SCIVersionString, [SCIUtils IGVersionString]]],
             [self newLinkCellWithTitle:@"Developer" detailTitle:@"Raul Fernandes" url:@"https://github.com/RaulTheMiner17" iconURL:@"https://i.imgur.com/WSFMSok.png"],
-            [self newLinkCellWithTitle:@"Donate" detailTitle:@"Consider donating if you enjoy this tweak!" url:@"https://ko-fi.com/" iconURL:nil],
-            [self newLinkCellWithTitle:@"View Repo" detailTitle:@"View the tweak's source code on GitHub" url:@"https://github.com/RaulTheMiner17/SCInsta" iconURL:nil]
+            [self newLinkCellWithTitle:@"View Repo" detailTitle:@"View the tweak's source code on GitHub" url:@"https://github.com/RaulTheMiner17/RaulGram" iconURL:nil]
         ]];
         
         [self collectDynamicSpecifiersFromArray:_specifiers];
