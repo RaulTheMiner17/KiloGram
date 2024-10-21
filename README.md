@@ -1,7 +1,7 @@
 # RaulGram
 theos tweak to add extra functionality to instagram
 Based on SCInsta
-Tested on Instagram v350.0.12
+Tested on Instagram v349.1.11
 
 Working Features:
 Share Comment (Tap like button)
